@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace LaravelForm\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
