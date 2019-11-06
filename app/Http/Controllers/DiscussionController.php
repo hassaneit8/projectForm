@@ -3,6 +3,8 @@
 namespace LaravelForm\Http\Controllers;
 
 use Illuminate\Http\Request;
+use LaravelForm\Http\Requests\CreateDiscussionRequest;
+use LaravelForm\Discussion;
 
 class DiscussionController extends Controller
 {
@@ -11,9 +13,15 @@ class DiscussionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+   public function __construct()
+   {
+       $this->middleware('auth')->only(['create','store']);
+   }
+
     public function index()
     {
-        //
+        return view('discussion.index')->with('discussions',Discussion::paginate(2));#,return view('discussion.index',['discussions'=>Discussion::paginate(5)]
     }
 
     /**
@@ -32,9 +40,16 @@ class DiscussionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateDiscussionRequest $request)
     {
-        //
+//        dd("asdasd");
+        auth()->user()->discussions()->create([
+            'title' => $request->title,
+            'contnt' => $request->contnt,
+            'channel_id' => $request->channel,
+            'slug' => str_slug($request->title),
+        ]);
+        return redirect()->route('discussion.index');
     }
 
     /**

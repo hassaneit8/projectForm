@@ -25,8 +25,8 @@ class CreateDiscussionRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'content' => 'required',
-            'slug' => 'required|unique',
+            'contnt' => 'required',
+            'channel' => 'required',
         ];
     }
 }
