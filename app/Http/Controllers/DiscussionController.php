@@ -42,14 +42,13 @@ class DiscussionController extends Controller
      */
     public function store(CreateDiscussionRequest $request)
     {
-//        dd("asdasd");
         auth()->user()->discussions()->create([
             'title' => $request->title,
             'contnt' => $request->contnt,
             'channel_id' => $request->channel,
             'slug' => str_slug($request->title),
         ]);
-        return redirect()->route('discussion.index');
+        return redirect()->route('discussions.index');
     }
 
     /**
@@ -58,9 +57,11 @@ class DiscussionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Discussion $discussion)
     {
-        //
+        return view('discussion.show',[
+            'discussion'=>$discussion
+        ]);
     }
 
     /**

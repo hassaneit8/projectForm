@@ -78,13 +78,20 @@
         <main class="container py-4">
             <div class="row">
                 <div class="col-md-4">
-                    <ul class="list-group">
-                        @foreach($channels as $channel)
-                            <li class="list-group-item">
-                                {{ $channel ->name }}
-                            </li>
-                        @endforeach
-                    </ul>
+                    <a href="{{ route('discussions.create') }}" style="width: 100%;color: snow "
+                       class="btn btn-info my-2">Add Discussion</a>
+                    <div class="card">
+                        <div class="card-header">
+                            Channels
+                        </div>
+                        <ul class="list-group">
+                            @foreach($channels as $channel)
+                                <li class="list-group-item">
+                                    {{ $channel ->name }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
                 <div class="col-md-8">
                     @yield('content')
@@ -98,8 +105,7 @@
     @endauth
 
 </div>
-
-<script src="{{ asset('js/app.js') }}" ></script>
+<script src="{{ asset('js/app.js') }}"></script>
 @yield('js')
 <!-- Scripts -->
 
