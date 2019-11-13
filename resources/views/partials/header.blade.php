@@ -8,7 +8,7 @@
             </strong>
         </div>
         <div>
-            <a class="btn-info btn-sm " href="{{route('discussions.show',$discussion->slug)}}">view</a>
+            <a class="btn-success btn-sm " href="{{route('discussions.show',$discussion->slug)}}">view</a>
         </div>
     </div>
 </div>
