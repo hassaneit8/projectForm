@@ -3,25 +3,19 @@
 namespace LaravelForm\Http\Controllers;
 
 use Illuminate\Http\Request;
-use LaravelForm\Http\Requests\CreateDiscussionRequest;
 use LaravelForm\Discussion;
+use LaravelForm\Http\Requests\AddReplyRequest;
 
-class DiscussionController extends Controller
+class RepliesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-   public function __construct()
-   {
-       $this->middleware('auth')->only(['create','store']);
-   }
-
     public function index()
     {
-        return view('discussion.index')->with('discussions',Discussion::paginate(6));#,return view('discussion.index',['discussions'=>Discussion::paginate(5)]
+        //
     }
 
     /**
@@ -31,7 +25,7 @@ class DiscussionController extends Controller
      */
     public function create()
     {
-        return view('discussion.create');
+        //
     }
 
     /**
@@ -40,15 +34,14 @@ class DiscussionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateDiscussionRequest $request)
+    public function store(AddReplyRequest $request ,Discussion $discussion)
     {
-        auth()->user()->discussions()->create([
-            'title' => $request->title,
-            'contnt' => $request->contnt,
-            'channel_id' => $request->channel,
-            'slug' => str_slug($request->title),
+        auth()->user()->replies()->create([
+            'contnt'=>$request->contnt,
+            'discussion_id'=>$discussion->id,
         ]);
-        return redirect()->route('discussions.index');
+
+        return redirect()->back()->with('message','Reply Add Successfully');
     }
 
     /**
@@ -57,11 +50,9 @@ class DiscussionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Discussion $discussion)
+    public function show($id)
     {
-        return view('discussion.show',[
-            'discussion'=>$discussion
-        ]);
+        //
     }
 
     /**

@@ -18,4 +18,8 @@ class Discussion extends Model
     {
         return 'slug'; //  use the slug instead of id in show method
     }
+
+    public function replies(){
+        return $this->hasMany(Reply::class);
+    }
 }
