@@ -5,6 +5,7 @@ namespace LaravelForm\Http\Controllers;
 use Illuminate\Http\Request;
 use LaravelForm\Http\Requests\CreateDiscussionRequest;
 use LaravelForm\Discussion;
+use LaravelForm\Reply;
 
 class DiscussionController extends Controller
 {
@@ -96,5 +97,9 @@ class DiscussionController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function reply(Discussion $discussion , Reply $reply){
+        $discussion->makeAsBestReply($reply);
+        return redirect()->back()->with('message','mark as best done');
     }
 }

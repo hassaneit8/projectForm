@@ -41,6 +41,8 @@ class RepliesController extends Controller
             'discussion_id'=>$discussion->id,
         ]);
 
+        #session()->flash('message','AADDDEDDd');
+
         return redirect()->back()->with('message','Reply Add Successfully');
     }
 

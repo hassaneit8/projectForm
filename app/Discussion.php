@@ -22,4 +22,20 @@ class Discussion extends Model
     public function replies(){
         return $this->hasMany(Reply::class);
     }
+
+//    add the best reply
+    public  function makeAsBestReply(Reply $reply)
+    {
+        $this->update([
+            'reply_id'=>$reply->id
+        ]);
+    }
+
+//    public function getBestReply(){
+//        return Reply::find($this->reply_id);
+//    }
+
+    public function bestReply(){
+        return $this->belongsTo(Reply::class,'reply_id');
+    }
 }
